@@ -1,0 +1,39 @@
+version: "3.9"
+   
+services:
+  
+  backend:
+    container_name: ogogo_backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: scripts/django.sh
+    env_file:
+      - .env
+    ports:
+      - 127.0.0.1:8500:8000
+    restart: always
+    volumes:
+      - .:/usr/src/project
+      - .backend_log:/log
+    networks:
+      ogogo_network:
+    depends_on:
+      - db
+  
+  db:
+    container_name: ogogo_db
+    image: postgis/postgis:15-3.3
+    restart: always
+    ports:
+      - "5432"
+    env_file:
+      - .env
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    networks:
+      ogogo_network:
+
+networks:
+  ogogo_network:
+    driver: bridge

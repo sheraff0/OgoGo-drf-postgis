@@ -1,0 +1,15 @@
+Django
+django-environ
+django-filter
+djangorestframework
+psycopg2-binary
+
+Pillow
+
+# django admin custom UI
+django-jazzmin
+
+# dev tools
+drf-spectacular
+django-debug-toolbar
+ipython
